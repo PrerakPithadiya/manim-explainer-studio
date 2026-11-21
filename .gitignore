@@ -1,0 +1,32 @@
+# Virtual Environments
+venv/
+.venv/
+env/
+
+# Python caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Global scratch renders (first test videos)
+/media/
+
+# Manim intermediate render files (keep final mp4s, ignore partial chunks & text svgs)
+partial_movie_files/
+media/texts/
+media/videos/*/partial_movie_files/
+videos/*/media/texts/
+videos/*/media/videos/*/partial_movie_files/
+
+# IDE & OS
+.agent/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
