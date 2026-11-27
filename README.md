@@ -11,15 +11,24 @@ The project follows a modular, content-driven architecture so that new animation
 ```
 manim-test/
 ├── videos/                                    # All video projects reside here
-│   └── model_context_protocol/                # Video: Model Context Protocol (MCP)
-│       ├── model_context_protocol.py          # Main animation scene (ModelContextProtocol / MCPFlow)
-│       ├── test_model_context_protocol.py     # Automated verification suite
-│       ├── README.md                          # Storyboard, scene timings & script
+│   ├── model_context_protocol/                # Video: Model Context Protocol (MCP)
+│   │   ├── model_context_protocol.py          # Main animation scene (ModelContextProtocol / MCPFlow)
+│   │   ├── test_model_context_protocol.py     # Automated verification suite
+│   │   ├── README.md                          # Storyboard, scene timings & script
+│   │   └── media/                             # Dedicated render outputs for this video
+│   │       └── videos/
+│   │           └── model_context_protocol/
+│   │               ├── 480p15/ModelContextProtocol.mp4
+│   │               └── 1080p60/ModelContextProtocol.mp4
+│   └── multi_agent_swarm/                     # Video: Autonomous Multi-Agent Swarms
+│       ├── multi_agent_swarm.py               # Main 5-act animation scene (MultiAgentSwarm / SwarmOrchestration)
+│       ├── test_multi_agent_swarm.py          # Automated verification & >= 120s duration suite
+│       ├── README.md                          # Storyboard, scene timings & render guide
 │       └── media/                             # Dedicated render outputs for this video
 │           └── videos/
-│               └── model_context_protocol/
-│                   ├── 480p15/ModelContextProtocol.mp4
-│                   └── 1080p60/ModelContextProtocol.mp4
+│               └── multi_agent_swarm/
+│                   ├── 480p15/MultiAgentSwarm.mp4
+│                   └── 1080p60/MultiAgentSwarm.mp4
 ├── media/                                     # Global / default render output folder
 ├── venv/                                      # Python virtual environment
 ├── pytest.ini                                 # Pytest configuration (filters 3rd-party warnings)
@@ -35,6 +44,7 @@ manim-test/
 | Project Folder | Topic / Content | Scene Class | Duration | Formats | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | [`videos/model_context_protocol/`](videos/model_context_protocol/) | Model Context Protocol (MCP) Architecture & JSON-RPC flow | `ModelContextProtocol` (alias `MCPFlow`) | ~48.2s | 1080p60, 480p15 | ✅ Completed |
+| [`videos/multi_agent_swarm/`](videos/multi_agent_swarm/) | Autonomous Multi-Agent Swarm Orchestration, Event Bus, DAG & Self-Correction | `MultiAgentSwarm` (alias `SwarmOrchestration`) | ~125.6s | 1080p60, 480p15 | ✅ Completed |
 
 ---
 
@@ -57,6 +67,7 @@ Runs tests across all video projects:
 
 To run tests for a specific video project:
 ```powershell
+.\venv\Scripts\pytest videos\multi_agent_swarm\test_multi_agent_swarm.py
 .\venv\Scripts\pytest videos\model_context_protocol\test_model_context_protocol.py
 ```
 
@@ -64,15 +75,17 @@ To run tests for a specific video project:
 
 #### Fast Low-Quality Preview (480p @ 15fps)
 ```powershell
-.\venv\Scripts\manim -ql videos\model_context_protocol\model_context_protocol.py ModelContextProtocol
+.\venv\Scripts\manim -ql --media_dir videos\multi_agent_swarm\media videos\multi_agent_swarm\multi_agent_swarm.py MultiAgentSwarm
+.\venv\Scripts\manim -ql --media_dir videos\model_context_protocol\media videos\model_context_protocol\model_context_protocol.py ModelContextProtocol
 ```
 
 #### Production High-Definition Render (1080p @ 60fps)
 ```powershell
-.\venv\Scripts\manim -qh videos\model_context_protocol\model_context_protocol.py ModelContextProtocol
+.\venv\Scripts\manim -qh --media_dir videos\multi_agent_swarm\media videos\multi_agent_swarm\multi_agent_swarm.py MultiAgentSwarm
+.\venv\Scripts\manim -qh --media_dir videos\model_context_protocol\media videos\model_context_protocol\model_context_protocol.py ModelContextProtocol
 ```
 
-*(Note: `MCPFlow` is also available as an alias for backwards compatibility)*.
+*(Note: `SwarmOrchestration` and `MCPFlow` are also available as aliases for backwards compatibility)*.
 
 ---
 
